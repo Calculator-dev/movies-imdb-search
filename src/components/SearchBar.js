@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
@@ -20,6 +20,9 @@ export default function SearchBar() {
         setInput(e.target.value)
     }
 
+    useEffect(() => {
+        dispatch(getMovies("Titanic"))
+    }, [dispatch])
 
     return (
         <div>

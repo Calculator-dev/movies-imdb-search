@@ -38,26 +38,6 @@ export default function MovieDetails() {
     const reviews = useSelector(state => state.movies?.reviews)
     const genres = useSelector(state => state.movies?.genres)
     const release = useSelector(state => state.movies?.release)
-
-    // const getMovieInfo = () => {
-    //     dispatch(getReviews(id))
-    //     dispatch(getAwards(id))
-
-    //     const delayOne = setTimeout(() => {
-    //         dispatch(getGenres(id))
-    //         dispatch(getDetails(id))
-    //     }, 500)
-
-    //     const delayTwo = setTimeout(() => {
-    //         dispatch(getReleases(id))
-    //         dispatch(getSimilarMovies(id, setLoading))
-    //     }, 1500)
-
-    //     return () => {
-    //         clearTimeout(delayOne)
-    //         clearTimeout(delayTwo)
-    //     }
-    // }
     
     useEffect(() => {
         if(id) dispatch(getAwards(id)) 
