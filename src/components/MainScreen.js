@@ -6,7 +6,7 @@ export default function MainScreen() {
 
 
     return (
-        <div style={{ height: "100vh", background: "#DBF6E9" }}>
+        <div>
             <Header />
             <MovieList />
         </div>

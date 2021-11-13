@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
-import { addMovies } from '../slices/MovieSlice';
-import { getMovies } from "./api/api"
+import { getMovies } from '../slices/MovieSlice';
 
 
 export default function SearchBar() {
     const dispatch = useDispatch();
-    const [movies, setMovies] = useState([])
     const [input, setInput] = useState("")
 
     const handleKey = (e) => {
         e.preventDefault()
-        getMovies(input, setMovies)
+        dispatch(getMovies(input))
     }
 
     const onChange = (e) => {
@@ -22,9 +20,6 @@ export default function SearchBar() {
         setInput(e.target.value)
     }
 
-    useEffect(() => {
-        if (movies) dispatch(addMovies(movies))
-    }, [movies, dispatch])
 
     return (
         <div>

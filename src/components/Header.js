@@ -7,8 +7,6 @@ import Typography from '@mui/material/Typography';
 import logo from "../assets/clapperboard.png";
 import SearchBar from './SearchBar';
 import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import { addMovies } from "../slices/MovieSlice"
 
 const MovieLogo = styled("img")(({ theme }) => ({
     width: "30px",
@@ -30,18 +28,15 @@ const ToolbarStyle = styled(Toolbar)({
 })
 
 export default function Header() {
-    const dispatch = useDispatch()
 
-    const clickHandler = () => {
-        dispatch(addMovies([]))
-    }
+    
 
     return (
         <Box sx={{ flexGrow: 1 }} >
             <AppBar position="relative" style={{ background: "#31326F" }} >
                 <ToolbarStyle>
                     <Link to="/">
-                        <MovieLogo onClick={clickHandler} src={logo} alt="logo_movie" />
+                        <MovieLogo src={logo} alt="logo_movie" />
                     </Link>
                     <Typography
                         variant="h5"

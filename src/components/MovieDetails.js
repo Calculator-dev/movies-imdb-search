@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect} from 'react'
 import Header from "./Header"
-import { Paper, styled, Typography } from "@mui/material"
+import {  styled, Typography} from "@mui/material"
 import { useParams } from 'react-router'
-import { getReviews } from './api/api'
-import { addReviews } from '../slices/MovieSlice'
+import { getAwards, getDetails, getGenres, getReviews, getReleases, getSimilarMovies} from '../slices/MovieSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import SimilarMovies from './SimilarMovies'
 
-const MainContainer = styled(Paper)({
+const MainContainer = styled("div")({
     display: "flex",
+    // '@media (max-width: 1025px)': {
+    //     flexDirection: "column"
+    // },
+    '@media (max-width: 600px)': {
+        flexDirection: "column"
+    },
 })
 
 const IMGDiv = styled("div")({
@@ -16,29 +22,79 @@ const IMGDiv = styled("div")({
 
 const ContentDiv = styled("div")({
     padding: "20px",
-    display: "inline-block"
+    width: "80%"
+})
+
+const Image = styled("img")({
+    height: "450px",
+    width: "300px"
 })
 
 export default function MovieDetails() {
-    const { id } = useParams()
-    const [reviews, setReviews] = useState([]);
+    const {id} = useParams()
+    const dispatch = useDispatch();
+    const awards = useSelector(state => state.movies?.awards)
+    const details = useSelector(state => state.movies?.details)
+    const reviews = useSelector(state => state.movies?.reviews)
+    const genres = useSelector(state => state.movies?.genres)
+    const release = useSelector(state => state.movies?.release)
 
+    // const getMovieInfo = () => {
+    //     dispatch(getReviews(id))
+    //     dispatch(getAwards(id))
+
+    //     const delayOne = setTimeout(() => {
+    //         dispatch(getGenres(id))
+    //         dispatch(getDetails(id))
+    //     }, 500)
+
+    //     const delayTwo = setTimeout(() => {
+    //         dispatch(getReleases(id))
+    //         dispatch(getSimilarMovies(id, setLoading))
+    //     }, 1500)
+
+    //     return () => {
+    //         clearTimeout(delayOne)
+    //         clearTimeout(delayTwo)
+    //     }
+    // }
+    
     useEffect(() => {
-        if (id) getReviews(id, setReviews)
-    }, [id])
+        if(id) dispatch(getAwards(id)) 
+        if(id) dispatch(getDetails(id))
+        if(id) dispatch(getReleases(id))
+        setTimeout(() => {
+            if(id) dispatch(getReviews(id))
+            if(id) dispatch(getGenres(id))
+            
+        }, 1000);
+        setTimeout(() => {
+            
+            if (id) dispatch(getSimilarMovies(id))
+        }, 1500);
+    }, [dispatch, id])
 
     return (
         <div>
             <Header />
-            <MainContainer>
-                <IMGDiv style={{ border: "1px solid red" }}>
-
+            <MainContainer >
+                <IMGDiv>
+                    <Image src={details?.image?.url} alt="movie" />
+                    <Typography children={details.title} variant="h5" />
                 </IMGDiv>
-                <ContentDiv style={{ border: "1px solid green" }}>
-                    <Typography>Review: {reviews[0]?.quote}</Typography>
-                    <Typography>Reviewer: {reviews[0]?.reviewer}</Typography>
+                <ContentDiv>
+                     <Typography>Review: {reviews?.metacritic?.reviews[0]?.quote}</Typography>
+                    <br/>
+                     <Typography>Reviewer: {reviews?.metacritic?.reviews[0]?.reviewer}</Typography>
+                    <br/>
+                     <Typography>Awards: {awards} </Typography> 
+                    <br/>
+                      <Typography>Genres: {genres.join(", ")}</Typography>
+                    <br />
+                    <Typography>Release: {release[0]?.date}</Typography>
                 </ContentDiv>
             </MainContainer>
+           <SimilarMovies />
         </div>
     )
 }

@@ -27,12 +27,11 @@ const CardContainer = styled("div")({
 
 export default function MovieList() {
     const movies = useSelector(state => state.movies.movies)
-    console.log(movies)
-
+    const newMovies = movies.filter((movie) => movie.id.startsWith('/t'));
 
     return (
         <CardContainer>
-            {movies.map((movie, i) => {
+            {newMovies.map((movie, i) => {
                 return <MovieCard data={movie} key={i} />
             })}
         </CardContainer>
