@@ -25,6 +25,8 @@ const CardContainer = styled("div")({
     },
 })
 
+
+
 export default function MovieList() {
     const movies = useSelector(state => state.movies.movies)
     const newMovies = movies.filter((movie) => movie.id.startsWith('/t'));

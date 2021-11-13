@@ -7,6 +7,8 @@ const CardImg = styled(CardMedia)({
     height: "600px"
 })
 
+
+
 export default function MovieCover({image, title}) {
     return (
         <div>
