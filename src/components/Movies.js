@@ -5,7 +5,6 @@ export default function Movies() {
     return (
         <div>
             <MainScreen />
-
         </div>
     )
 }

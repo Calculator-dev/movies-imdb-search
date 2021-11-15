@@ -18,7 +18,7 @@ export default function SimilarMovies({getMovieInfo}) {
                 params: {tconst: movieIdList[i]},
                 headers: {
                     'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-                    'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+                    'x-rapidapi-key': '7e21433176msh7e2242fdde2b9e1p1d26d2jsn128115f99941'
                   }
             })
             .then((res) => {setTenMovies(result => [...result, res.data])})

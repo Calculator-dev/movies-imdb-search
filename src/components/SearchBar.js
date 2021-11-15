@@ -5,14 +5,18 @@ import { styled, alpha } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { getMovies } from '../slices/MovieSlice';
 
+import { useHistory } from 'react-router-dom'
+
 
 export default function SearchBar() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [input, setInput] = useState("")
 
     const handleKey = (e) => {
         e.preventDefault()
         dispatch(getMovies(input))
+        history.push("/")
     }
 
     const onChange = (e) => {
@@ -41,7 +45,6 @@ export default function SearchBar() {
         </div>
     )
 }
-
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',

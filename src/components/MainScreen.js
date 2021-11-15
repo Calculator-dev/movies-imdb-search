@@ -4,7 +4,6 @@ import MovieList from "./MovieList"
 
 export default function MainScreen() {
 
-
     return (
         <div>
             <Header />

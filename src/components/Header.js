@@ -29,8 +29,6 @@ const ToolbarStyle = styled(Toolbar)({
 
 export default function Header() {
 
-    
-
     return (
         <Box sx={{ flexGrow: 1 }} >
             <AppBar position="relative" style={{ background: "#31326F" }} >
@@ -46,7 +44,7 @@ export default function Header() {
                     >
                         Movies/IMDB Search Application
                     </Typography>
-
+                    
                     <SearchBar />
                 </ToolbarStyle>
             </AppBar>
