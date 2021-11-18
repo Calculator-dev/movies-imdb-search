@@ -8,18 +8,20 @@ const initialState = {
     awards: [],
     release: [],
     movies: [],
-    similar: []
+    similar: [],
+    loading: null
 }
 
-export const getMovies = createAsyncThunk("movies/getMovies", async (input) => {
-    const response = await axios.get("https://imdb8.p.rapidapi.com/title/find", {
+export const getMovies = createAsyncThunk("movies/getMovies", async (input, ) => {
+    return await axios.get("https://imdb8.p.rapidapi.com/title/find", {
     params: {q: input},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
     }    
     })
-   return await response?.data?.results
+    .then((response) => response?.data?.results)
+   
 })
 
 export const getAwards = createAsyncThunk("movies/getAwards", async (id) => {
@@ -27,10 +29,10 @@ export const getAwards = createAsyncThunk("movies/getAwards", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
     }    
     })
-   return await response?.data?.resource?.awards?.length
+   return response?.data?.resource?.awards?.length
 })
 
 export const getDetails = createAsyncThunk("movies/getDetails", async (id) => {
@@ -38,10 +40,10 @@ export const getDetails = createAsyncThunk("movies/getDetails", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
     }    
     })
-   return await response?.data
+   return response?.data
 })
 
 export const getReviews = createAsyncThunk("movies/getReviews", async (id) => {
@@ -49,10 +51,10 @@ export const getReviews = createAsyncThunk("movies/getReviews", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
     }    
     })
-   return await response?.data
+   return response?.data
 })
 
 export const getGenres = createAsyncThunk("movies/getGenres", async (id) => {
@@ -60,21 +62,21 @@ export const getGenres = createAsyncThunk("movies/getGenres", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
     }    
     })
-   return await response?.data
+   return response?.data
 })
 
-export const getReleases = createAsyncThunk("movies/getReleases", async (id, setLoading) => {
+export const getReleases = createAsyncThunk("movies/getReleases", async (id) => {
     const response = await axios.get("https://imdb8.p.rapidapi.com/title/get-releases", {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
     }    
     })
-   return await response?.data
+   return response?.data
 })
 
 export const getSimilarMovies = createAsyncThunk("movies/getSimilarMovies", async (id) => {
@@ -82,12 +84,15 @@ export const getSimilarMovies = createAsyncThunk("movies/getSimilarMovies", asyn
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'd82aceb348msh3b3b4793815652dp10819fjsn82b5cb927c51'
+      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
     }    
     })
 
-   return await response?.data
+   return response?.data
 })
+
+
+
 
 
 
@@ -97,13 +102,13 @@ const movieSlice = createSlice({
     reducers: {},
     extraReducers: {
         [getMovies.pending]: (state) => {
-            state.loading = true;
+            state.loading = "loading";
         },
         [getMovies.fulfilled]: (state, {payload}) => {
-            return {...state, movies: payload}
+            return {...state, movies: payload};
         },
         [getMovies.rejected]: (state) => {
-            state.loading = true;
+            state.loading = "rejected";
         },
         [getAwards.fulfilled]: (state, {payload}) => {
             return {...state, awards: payload}
