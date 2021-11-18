@@ -1,7 +1,9 @@
 import React from 'react'
-import { styled } from "@mui/material"
+import { styled, Typography } from "@mui/material"
 import { useSelector } from "react-redux"
-import MovieCard from "./MovieCard"
+import MovieCover from './MovieCover'
+
+
 
 const CardContainer = styled("div")({
     display: "grid",
@@ -25,17 +27,17 @@ const CardContainer = styled("div")({
     },
 })
 
-
-
 export default function MovieList() {
     const movies = useSelector(state => state.movies.movies)
-    const newMovies = movies.filter((movie) => movie.id.startsWith('/t'));
+    if (movies === undefined) var noMovies = <h1>Nema takvih filmova</h1>
+    if (movies !== undefined) var newMovies = movies.filter((movie) => movie.id.startsWith('/title/tt'));
+    console.log(newMovies)
 
     return (
         <CardContainer>
-            {newMovies.map((movie, i) => {
-                return <MovieCard data={movie} key={i} />
-            })}
+            {!noMovies ? newMovies.map((movie, i) => {
+                return <MovieCover data={movie} key={i} />
+            }) : <Typography variant="body2">There is no Movies with that title. Please try another Movie title.</Typography>}
         </CardContainer>
     )
 }

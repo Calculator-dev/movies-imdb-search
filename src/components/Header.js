@@ -6,7 +6,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import logo from "../assets/clapperboard.png";
 import SearchBar from './SearchBar';
-import { Link } from "react-router-dom"
 
 const MovieLogo = styled("img")(({ theme }) => ({
     width: "30px",
@@ -33,9 +32,7 @@ export default function Header() {
         <Box sx={{ flexGrow: 1 }} >
             <AppBar position="relative" style={{ background: "#31326F" }} >
                 <ToolbarStyle>
-                    <Link to="/">
                         <MovieLogo src={logo} alt="logo_movie" />
-                    </Link>
                     <Typography
                         variant="h5"
                         noWrap

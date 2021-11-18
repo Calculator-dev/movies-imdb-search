@@ -1,14 +1,12 @@
-import { CircularProgress } from '@mui/material';
 import { styled } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import {useSelector } from 'react-redux'
-import SimilarMovieCover from './SimilarMovieCover';
+import MovieCover from './MovieCover';
 
-export default function SimilarMovies({getMovieInfo}) {
+export default function SimilarMovies() {
     let similar = useSelector(state => state.movies?.similar)
     const [tenMovies, setTenMovies] = useState([]);
-    const [loading, setLoading] = useState(false)
     let movieIdList = similar.map(e => {return e.substring(0, e.length - 1).replace("/title/", "")})
     
 
@@ -18,11 +16,10 @@ export default function SimilarMovies({getMovieInfo}) {
                 params: {tconst: movieIdList[i]},
                 headers: {
                     'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-                    'x-rapidapi-key': '7e21433176msh7e2242fdde2b9e1p1d26d2jsn128115f99941'
+                    'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
                   }
             })
             .then((res) => {setTenMovies(result => [...result, res.data])})
-            setLoading(true)
         }
     }
 
@@ -30,24 +27,25 @@ export default function SimilarMovies({getMovieInfo}) {
         if(newMovies.length < 10){
             newMovies()
         }
+        return () => {
+            setTenMovies([]) 
+          };
         // eslint-disable-next-line
     }, [similar])
 
     return (
         <CardContainer>
-            {loading ? tenMovies.map((movie, i) => {
+            { tenMovies.map((movie, i) => {
                     return (
-                    <SimilarMovieCover key={i} data={movie} getMovieInfo={getMovieInfo}/>
-             )}) : <CircularProgress />}
+                    <MovieCover key={i} data={movie} />
+             )}) }
         </CardContainer>
     )
 }
 
 const CardContainer = styled("div")({
-    width: "150px",
     display: "grid",
     gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
-    marginLeft: "100px",
     '@media (max-width: 1025px)': {
         gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
         marginLeft: "0px",

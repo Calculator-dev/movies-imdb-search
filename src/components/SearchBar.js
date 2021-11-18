@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react'
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { getMovies } from '../slices/MovieSlice';
 
 import { useHistory } from 'react-router-dom'
@@ -15,14 +15,18 @@ export default function SearchBar() {
 
     const handleKey = (e) => {
         e.preventDefault()
-        dispatch(getMovies(input))
-        history.push("/")
+
+            dispatch(getMovies(input))
+            history.push("/")
     }
 
     const onChange = (e) => {
         e.preventDefault()
         setInput(e.target.value)
     }
+
+
+    
 
     useEffect(() => {
         dispatch(getMovies("Titanic"))
