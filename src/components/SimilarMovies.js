@@ -16,7 +16,7 @@ export default function SimilarMovies() {
                 params: {tconst: movieIdList[i]},
                 headers: {
                     'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-                    'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+                    'x-rapidapi-key': '21689d19d5mshc80479d1ca5984ep1ab463jsnde1ce133b7fa'
                   }
             })
             .then((res) => {setTenMovies(result => [...result, res.data])})
@@ -47,7 +47,7 @@ const CardContainer = styled("div")({
     display: "grid",
     gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
     '@media (max-width: 1025px)': {
-        gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
+        gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
         marginLeft: "0px",
     },
     '@media (max-width: 1440px)': {
