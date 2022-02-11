@@ -6,6 +6,7 @@ import { useDispatch} from 'react-redux';
 import { getMovies } from '../slices/MovieSlice';
 
 import { useHistory } from 'react-router-dom'
+import { Button } from '@mui/material';
 
 
 export default function SearchBar() {
@@ -28,9 +29,9 @@ export default function SearchBar() {
 
     
 
-    useEffect(() => {
-        dispatch(getMovies("Titanic"))
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getMovies("Titanic"))
+    // }, [dispatch])
 
     return (
         <div>
@@ -45,6 +46,7 @@ export default function SearchBar() {
                         onChange={onChange}
                     />
                 </Search>
+                <Button>Hello</Button>
             </form>
         </div>
     )

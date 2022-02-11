@@ -12,15 +12,15 @@ const initialState = {
     loading: null
 }
 
-export const getMovies = createAsyncThunk("movies/getMovies", async (input, ) => {
-    return await axios.get("https://imdb8.p.rapidapi.com/title/find", {
+export const getMovies = createAsyncThunk("movies/getMovies", async (input) => {
+    return await axios.get("https://imdb8.p.rapidapi.com/auto-complete", {
     params: {q: input},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+      'x-rapidapi-key': 'ebbe8b8f73mshe55e467c001f89bp141abejsn5915d621088d'
     }    
     })
-    .then((response) => response?.data?.results)
+    .then((response) => console.log(response))
    
 })
 
@@ -29,7 +29,7 @@ export const getAwards = createAsyncThunk("movies/getAwards", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+      'x-rapidapi-key': '21689d19d5mshc80479d1ca5984ep1ab463jsnde1ce133b7fa'
     }    
     })
    return response?.data?.resource?.awards?.length
@@ -40,7 +40,7 @@ export const getDetails = createAsyncThunk("movies/getDetails", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+      'x-rapidapi-key': '21689d19d5mshc80479d1ca5984ep1ab463jsnde1ce133b7fa'
     }    
     })
    return response?.data
@@ -51,7 +51,7 @@ export const getReviews = createAsyncThunk("movies/getReviews", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+      'x-rapidapi-key': '21689d19d5mshc80479d1ca5984ep1ab463jsnde1ce133b7fa'
     }    
     })
    return response?.data
@@ -62,7 +62,7 @@ export const getGenres = createAsyncThunk("movies/getGenres", async (id) => {
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+      'x-rapidapi-key': '21689d19d5mshc80479d1ca5984ep1ab463jsnde1ce133b7fa'
     }    
     })
    return response?.data
@@ -73,7 +73,7 @@ export const getReleases = createAsyncThunk("movies/getReleases", async (id) => 
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+      'x-rapidapi-key': '21689d19d5mshc80479d1ca5984ep1ab463jsnde1ce133b7fa'
     }    
     })
    return response?.data
@@ -84,17 +84,12 @@ export const getSimilarMovies = createAsyncThunk("movies/getSimilarMovies", asyn
     params: {tconst: id},
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',  
-      'x-rapidapi-key': 'de87ac35c8mshcf71714da1b3b21p16bbadjsn32dc251415f6'
+      'x-rapidapi-key': '21689d19d5mshc80479d1ca5984ep1ab463jsnde1ce133b7fa'
     }    
     })
 
    return response?.data
 })
-
-
-
-
-
 
 const movieSlice = createSlice({
     name: "movies",

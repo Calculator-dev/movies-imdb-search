@@ -29,7 +29,7 @@ const CardContainer = styled("div")({
 
 export default function MovieList() {
     const movies = useSelector(state => state.movies.movies)
-    if (movies === undefined) var noMovies = <h1>Nema takvih filmova</h1>
+    if (movies === undefined) var noMovies = <h1>There is no Movies with that title. Please try another Movie title.</h1>
     if (movies !== undefined) var newMovies = movies.filter((movie) => movie.id.startsWith('/t'));
     
     return (
