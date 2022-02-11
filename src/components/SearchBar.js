@@ -46,7 +46,6 @@ export default function SearchBar() {
                         onChange={onChange}
                     />
                 </Search>
-                <Button>Hello</Button>
             </form>
         </div>
     )
